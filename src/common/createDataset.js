@@ -1,10 +1,10 @@
-module.exports = (rgb) => {
+module.exports = (hex, fill, borderWidth) => {
 	return {
 		label: 'Cargando…',
-		fill: true,
-		borderWidth: 1,
-		borderColor: `rgba(${rgb}, 1)`,
-		backgroundColor: `rgba(${rgb}, .1)`,
+		fill,
+		borderWidth,
+		borderColor: hex,
+		backgroundColor: hex + 'FF',
 		data: []
 	};
 };

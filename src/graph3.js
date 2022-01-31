@@ -12,11 +12,7 @@ const url = document.getElementsByName('sheet-url')[0].content;
 
 /* set up async GET request */
 Spreadsheet.fetch(url, (file) => {
-	const data = createDataObject(
-		file.readRow(13, '3', 'Hoja1').cells,
-		[colors.orange, colors.cyan, colors.navy],
-		true
-	);
+	const data = createDataObject(file.readRow(12, '3', 'Hoja1').cells, [colors.orange]);
 
 	const config = createConfigObject('line', data);
 
@@ -28,7 +24,8 @@ Spreadsheet.fetch(url, (file) => {
 
 	const graph = new Chart(canvas, config);
 
-	graph.config.options.scales.y.stacked = true;
+	graph.config.options.scales.y.min = 0;
+	graph.config.options.scales.y.max = 100;
 
 	// Funciones para actualizar el gráfico
 	selector.onchange = () => {
@@ -36,17 +33,13 @@ Spreadsheet.fetch(url, (file) => {
 
 		if (selector.value == 1) {
 			sheetname = 'Hoja1';
-			graph.config.options.scales.y.beginAtZero = true;
-		} else {
+		} else if (selector.value == 2) {
 			sheetname = 'Hoja2';
-			graph.config.options.scales.y.beginAtZero = false;
+		} else {
+			sheetname = 'Hoja3';
 		}
 
-		updateGraph(graph, [
-			file.readRow(13, '4', sheetname),
-			file.readRow(13, '6', sheetname),
-			file.readRow(13, '7', sheetname)
-		]);
+		updateGraph(graph, [file.readRow(12, '4', sheetname)]);
 	};
 
 	selector.onchange();

@@ -12,54 +12,40 @@ const url = document.getElementsByName('sheet-url')[0].content;
 
 /* set up async GET request */
 Spreadsheet.fetch(url, (file) => {
-	const data = createDataObject(
-		file.readRow(13, '3', 'Hoja1').cells,
-		[colors.orange, colors.cyan, colors.navy],
-		true
-	);
+	const data = createDataObject(file.readRow(12, '3', 'Hoja1').cells, [
+		colors.cyan,
+		colors.blue,
+		colors.navy,
+		colors.orange
+	]);
 
 	const config = createConfigObject('line', data);
 
 	// Obtiene elementos de la página
 	const canvas = document.getElementById('chart');
-	const selector = document.getElementById('selector');
+	// const selector = document.getElementById('selector');
 	const imgButton = document.getElementById('img-button');
 	const fileButton = document.getElementById('file-button');
 
 	const graph = new Chart(canvas, config);
 
-	graph.config.options.scales.y.stacked = true;
-
 	// Funciones para actualizar el gráfico
-	selector.onchange = () => {
-		let sheetname;
-
-		if (selector.value == 1) {
-			sheetname = 'Hoja1';
-			graph.config.options.scales.y.beginAtZero = true;
-		} else {
-			sheetname = 'Hoja2';
-			graph.config.options.scales.y.beginAtZero = false;
-		}
-
-		updateGraph(graph, [
-			file.readRow(13, '4', sheetname),
-			file.readRow(13, '6', sheetname),
-			file.readRow(13, '7', sheetname)
-		]);
-	};
-
-	selector.onchange();
+	updateGraph(graph, [
+		file.readRow(12, '4', 'Hoja1'),
+		file.readRow(12, '5', 'Hoja1'),
+		file.readRow(12, '6', 'Hoja1'),
+		file.readRow(12, '7', 'Hoja1')
+	]);
 
 	// Funciones para descargar
 	imgButton.onclick = () => {
-		const filename = selector.value == 1 ? 'total_matricula.png' : 'distribucion_matricula.png';
+		const filename = 'matriculacion_por_nivel_educacional.png';
 
 		saveAsImg(filename, canvas);
 	};
 
 	fileButton.onclick = () => {
-		const filename = 'graph7.xslx';
+		const filename = 'graph1.xslx';
 
 		saveExcelFile(filename, url);
 	};

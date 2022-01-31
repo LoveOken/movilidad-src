@@ -9,7 +9,7 @@ class Spreadsheet {
 		try {
 			return this.sheets[sheetname][cell].v;
 		} catch (err) {
-			return '';
+			return undefined;
 		}
 	}
 
@@ -22,6 +22,27 @@ class Spreadsheet {
 			const value = this.readValue(cell, sheetname);
 
 			if (i === 0) {
+				label = value;
+			} else {
+				cells.push(value);
+			}
+		}
+
+		return {
+			label,
+			cells
+		};
+	}
+
+	readColumn(start, end, column, sheetname) {
+		let label;
+		const cells = [];
+
+		for (let i = start; i < end; i++) {
+			const cell = column + i;
+			const value = this.readValue(cell, sheetname);
+
+			if (i === start) {
 				label = value;
 			} else {
 				cells.push(value);
