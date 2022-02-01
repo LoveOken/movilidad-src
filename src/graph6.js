@@ -12,14 +12,13 @@ const url = document.getElementsByName('sheet-url')[0].content;
 
 /* set up async GET request */
 Spreadsheet.fetch(url, (file) => {
-	const data = createDataObject(file.readColumn(3, 20, 'A', 'Hoja1').shift().cells, [
-		colors.blue
-	]);
+	const data = createDataObject(file.readRow(8, '3', 'Hoja1').cells, [colors.orange]);
 
-	const config = createConfigObject('bar', data, {
+	const config = createConfigObject('line', data, {
 		scales: {
 			y: {
-				beginAtZero: true
+				min: 0,
+				max: 10
 			}
 		}
 	});
@@ -31,12 +30,14 @@ Spreadsheet.fetch(url, (file) => {
 
 	const graph = new Chart(canvas, config);
 
+	graph.config.options.scales.y.max = 10;
+
 	// Funciones para actualizar el gráfico
-	updateGraph(graph, [file.readColumn(3, 20, 'H', 'Hoja1').shift()]);
+	updateGraph(graph, [file.readRow(12, '4', 'Hoja1')]);
 
 	// Funciones para descargar
 	imgButton.onclick = () => {
-		const filename = 'poblacion_total_migrante_2020.png';
+		const filename = 'poblacion_migrante_como_porcentaje_del_total.png';
 
 		saveAsImg(filename, canvas);
 	};

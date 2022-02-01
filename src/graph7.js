@@ -12,13 +12,19 @@ const url = document.getElementsByName('sheet-url')[0].content;
 
 /* set up async GET request */
 Spreadsheet.fetch(url, (file) => {
-	const data = createDataObject(
-		file.readRow(13, '3', 'Hoja1').cells,
-		[colors.orange, colors.cyan, colors.navy],
-		true
-	);
+	const data = createDataObject(file.readRow(13, '3', 'Hoja1').cells, [
+		colors.orange,
+		colors.cyan,
+		colors.navy
+	]);
 
-	const config = createConfigObject('line', data);
+	const config = createConfigObject('line', data, {
+		scales: {
+			y: {
+				stacked: true
+			}
+		}
+	});
 
 	// Obtiene elementos de la página
 	const canvas = document.getElementById('chart');
@@ -27,8 +33,6 @@ Spreadsheet.fetch(url, (file) => {
 	const fileButton = document.getElementById('file-button');
 
 	const graph = new Chart(canvas, config);
-
-	graph.config.options.scales.y.stacked = true;
 
 	// Funciones para actualizar el gráfico
 	selector.onchange = () => {
@@ -53,14 +57,13 @@ Spreadsheet.fetch(url, (file) => {
 
 	// Funciones para descargar
 	imgButton.onclick = () => {
-		const filename = selector.value == 1 ? 'total_matricula.png' : 'distribucion_matricula.png';
+		const filename =
+			selector.value == 1 ? 'total_estud_matricula.png' : 'distribucion_estud_matricula.png';
 
 		saveAsImg(filename, canvas);
 	};
 
 	fileButton.onclick = () => {
-		const filename = 'graph7.xslx';
-
-		saveExcelFile(filename, url);
+		saveExcelFile(url);
 	};
 });

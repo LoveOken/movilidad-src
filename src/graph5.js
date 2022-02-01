@@ -12,14 +12,24 @@ const url = document.getElementsByName('sheet-url')[0].content;
 
 /* set up async GET request */
 Spreadsheet.fetch(url, (file) => {
-	const data = createDataObject(file.readColumn(3, 20, 'A', 'Hoja1').shift().cells, [
-		colors.blue
+	const data = createDataObject(file.readColumn(4, 20, 'A', 'Hoja1').cells, [
+		colors.blue,
+		colors.orange
 	]);
 
 	const config = createConfigObject('bar', data, {
+		indexAxis: 'y',
 		scales: {
+			x: {
+				stacked: true,
+				ticks: {
+					callback: function (value) {
+						return Math.abs(value);
+					}
+				}
+			},
 			y: {
-				beginAtZero: true
+				stacked: true
 			}
 		}
 	});
@@ -32,11 +42,14 @@ Spreadsheet.fetch(url, (file) => {
 	const graph = new Chart(canvas, config);
 
 	// Funciones para actualizar el gráfico
-	updateGraph(graph, [file.readColumn(3, 20, 'H', 'Hoja1').shift()]);
+	updateGraph(graph, [
+		file.readColumn(4, 20, 'N', 'Hoja1').invert(),
+		file.readColumn(4, 20, 'O', 'Hoja1')
+	]);
 
 	// Funciones para descargar
 	imgButton.onclick = () => {
-		const filename = 'poblacion_total_migrante_2020.png';
+		const filename = 'poblacion_migrante_por_sexo.png';
 
 		saveAsImg(filename, canvas);
 	};

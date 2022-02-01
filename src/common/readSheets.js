@@ -13,6 +13,28 @@ class Spreadsheet {
 		}
 	}
 
+	createValues(label, cells) {
+		return {
+			label,
+			cells,
+			shift: function () {
+				this.cells.shift();
+
+				return this;
+			},
+			invert: function () {
+				this.cells = this.cells.map((c) => -c);
+
+				return this;
+			},
+			nullify: function () {
+				this.cells = this.cells.map((c) => (typeof c === 'undefined' ? -10000 : c));
+
+				return this;
+			}
+		};
+	}
+
 	readRow(length, row, sheetname) {
 		let label;
 		const cells = [];
@@ -28,10 +50,7 @@ class Spreadsheet {
 			}
 		}
 
-		return {
-			label,
-			cells
-		};
+		return this.createValues(label, cells);
 	}
 
 	readColumn(start, end, column, sheetname) {
@@ -49,10 +68,7 @@ class Spreadsheet {
 			}
 		}
 
-		return {
-			label,
-			cells
-		};
+		return this.createValues(label, cells);
 	}
 
 	static fetch(url, cb) {

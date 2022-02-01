@@ -14,7 +14,14 @@ const url = document.getElementsByName('sheet-url')[0].content;
 Spreadsheet.fetch(url, (file) => {
 	const data = createDataObject(file.readRow(12, '3', 'Hoja1').cells, [colors.orange]);
 
-	const config = createConfigObject('line', data);
+	const config = createConfigObject('line', data, {
+		scales: {
+			y: {
+				min: 0,
+				max: 100
+			}
+		}
+	});
 
 	// Obtiene elementos de la página
 	const canvas = document.getElementById('chart');
@@ -23,9 +30,6 @@ Spreadsheet.fetch(url, (file) => {
 	const fileButton = document.getElementById('file-button');
 
 	const graph = new Chart(canvas, config);
-
-	graph.config.options.scales.y.min = 0;
-	graph.config.options.scales.y.max = 100;
 
 	// Funciones para actualizar el gráfico
 	selector.onchange = () => {
@@ -52,8 +56,6 @@ Spreadsheet.fetch(url, (file) => {
 	};
 
 	fileButton.onclick = () => {
-		const filename = 'graph7.xslx';
-
-		saveExcelFile(filename, url);
+		saveExcelFile(url);
 	};
 });

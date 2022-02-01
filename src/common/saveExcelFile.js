@@ -1,12 +1,11 @@
-module.exports = (filename, url) => {
+module.exports = (url) => {
 	if (navigator.msSaveBlob) {
 		fetch(url)
 			.then((r) => r.blob())
-			.then((blob) => navigator.msSaveBlob(blob, filename));
+			.then((blob) => navigator.msSaveBlob(blob));
 	} else {
 		const link = document.createElement('a');
 
-		link.download = filename;
 		link.href = url;
 
 		document.body.appendChild(link);
