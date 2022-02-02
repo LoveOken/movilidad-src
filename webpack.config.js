@@ -16,5 +16,14 @@ module.exports = {
 	output: {
 		filename: '[name]',
 		path: path.resolve(__dirname, 'dist')
+	},
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: ['babel-loader']
+			}
+		]
 	}
 };

@@ -2,7 +2,7 @@ module.exports = (url) => {
 	if (navigator.msSaveBlob) {
 		fetch(url)
 			.then((r) => r.blob())
-			.then((blob) => navigator.msSaveBlob(blob));
+			.then((blob) => navigator.msSaveBlob(blob, 'datos.xlsx'));
 	} else {
 		const link = document.createElement('a');
 

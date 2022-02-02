@@ -7,10 +7,13 @@ const saveExcelFile = require('./common/saveExcelFile');
 const updateGraph = require('./common/updateGraph');
 const colors = require('./common/colors');
 const createConfigObject = require('./common/createConfigObject');
+const displayAsPercentage = require('./common/displayAsPercentage');
+const setTitles = require('./common/setTitles');
 
 const url = document.getElementsByName('sheet-url')[0].content;
 
 Spreadsheet.fetch(url, (file) => {
+	// Cambiar estas variables cambiara los datos que se muestran
 	const rows = {
 		etiquetas: file.readRow(12, '3', 'Hoja1').cells,
 		hoja1: {
@@ -21,6 +24,7 @@ Spreadsheet.fetch(url, (file) => {
 		}
 	};
 
+	// Configura el gráfico en particular
 	const data = createDataObject(rows.etiquetas, [
 		colors.navy,
 		colors.cyan,
@@ -28,23 +32,18 @@ Spreadsheet.fetch(url, (file) => {
 		colors.orange
 	]);
 
+	const config = createConfigObject('line', data, {
+		scales: {
+			y: {
+				min: 0
+			}
+		}
+	});
+
 	data.datasets[0].fill = '3';
 	data.datasets[1].fill = '2';
 	data.datasets[2].fill = '0';
 	data.datasets[3].fill = 'origin';
-
-	const config = createConfigObject('line', data, {
-		scales: {
-			y: {
-				min: 0,
-				ticks: {
-					callback: function (value) {
-						return value + '%';
-					}
-				}
-			}
-		}
-	});
 
 	// Obtiene elementos de la página
 	const canvas = document.getElementById('chart');
@@ -54,12 +53,13 @@ Spreadsheet.fetch(url, (file) => {
 	const graph = new Chart(canvas, config);
 
 	// Funciones para actualizar el gráfico
-	updateGraph(graph, [
-		rows.hoja1.preescolar,
-		rows.hoja1.primaria,
-		rows.hoja1.secundaria,
-		rows.hoja1.terciaria
+	displayAsPercentage('y', graph);
+	setTitles(graph, 'Ecuador - Matriculación Escolar', 'Porcentaje bruto por año.', [
+		'Fuente: World Development Indicators v.4, The World Bank.',
+		'https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators.',
+		'Fecha de descarga: 6 Diciembre, 2021'
 	]);
+	updateGraph(graph, Object.values(rows.hoja1));
 
 	// Funciones para descargar
 	imgButton.onclick = () => {
