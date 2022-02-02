@@ -1,7 +1,6 @@
 /* global Chart */
 const colors = require('./colors');
 const customBackground = require('./customBackground');
-const { Filler } = require('chart.js');
 
 module.exports = (type, data, options = {}) => {
 	Chart.defaults.font.family = "'Open Sans', sans-serif";
@@ -9,22 +8,39 @@ module.exports = (type, data, options = {}) => {
 	Chart.defaults.font.weight = 300;
 	Chart.defaults.font.color = colors.gray;
 
-	console.log(Filler, data);
-
 	return {
 		type,
 		data,
 		options: {
-			...options,
+			aspectRatio: 1.5,
 			elements: {
-				line: {
-					fill: '-1'
+				point: {
+					radius: 0,
+					hitRadius: 5
 				}
 			},
 			layout: {
 				padding: 10
 			},
 			plugins: {
+				title: {
+					display: true,
+					text: 'Custom chart title.',
+					color: colors.cyan,
+					position: 'top',
+					align: 'start',
+					padding: 2,
+					font: {
+						size: 18,
+						family: "'Josefin Sans', sans-serif"
+					}
+				},
+				subtitle: {
+					display: true,
+					text: 'Cargando...',
+					position: 'top',
+					align: 'start'
+				},
 				legend: {
 					labels: {
 						font: {
@@ -35,7 +51,8 @@ module.exports = (type, data, options = {}) => {
 				tooltip: {
 					backgroundColor: colors.gray
 				}
-			}
+			},
+			...options
 		},
 		plugins: [customBackground]
 	};

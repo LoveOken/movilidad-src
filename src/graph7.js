@@ -26,6 +26,10 @@ Spreadsheet.fetch(url, (file) => {
 		}
 	});
 
+	data.datasets[0].fill = 'origin';
+	data.datasets[1].fill = '-1';
+	data.datasets[2].fill = '-1';
+
 	// Obtiene elementos de la página
 	const canvas = document.getElementById('chart');
 	const selector = document.getElementById('selector');

@@ -18,7 +18,12 @@ Spreadsheet.fetch(url, (file) => {
 		scales: {
 			y: {
 				min: 90,
-				max: 100
+				max: 100,
+				ticks: {
+					callback: function (value) {
+						return value + '%';
+					}
+				}
 			}
 		}
 	});
@@ -41,7 +46,7 @@ Spreadsheet.fetch(url, (file) => {
 			sheetname = 'Hoja2';
 		}
 
-		updateGraph(graph, [file.readRow(12, '4', sheetname)]);
+		updateGraph(graph, [file.readRow(12, '4', sheetname).nullify()]);
 	};
 
 	selector.onchange();

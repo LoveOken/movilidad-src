@@ -1,14 +1,12 @@
-module.exports = (hex, index) => {
+module.exports = (hex) => {
 	const config = {
 		label: 'Cargando…',
-		fill: 'origin',
-		borderWidth: 2,
+		fill: true,
+		borderWidth: 1,
 		borderColor: hex,
-		backgroundColor: hex + '20',
+		backgroundColor: hex + '10',
 		data: []
 	};
-
-	if (index > 0) delete config.fill;
 
 	return config;
 };

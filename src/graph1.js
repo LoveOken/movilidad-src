@@ -10,29 +10,38 @@ const createConfigObject = require('./common/createConfigObject');
 
 const url = document.getElementsByName('sheet-url')[0].content;
 
-/* set up async GET request */
 Spreadsheet.fetch(url, (file) => {
-	const data = createDataObject(file.readRow(12, '3', 'Hoja1').cells, [
+	const rows = {
+		etiquetas: file.readRow(12, '3', 'Hoja1').cells,
+		hoja1: {
+			preescolar: file.readRow(12, '4', 'Hoja1'),
+			primaria: file.readRow(12, '5', 'Hoja1'),
+			secundaria: file.readRow(12, '6', 'Hoja1'),
+			terciaria: file.readRow(12, '7', 'Hoja1').nullify()
+		}
+	};
+
+	const data = createDataObject(rows.etiquetas, [
 		colors.navy,
 		colors.cyan,
 		colors.blue,
 		colors.orange
 	]);
 
-	data.datasets[0].fill = '+3';
-	data.datasets[1].fill = '+1';
-	data.datasets[2].fill = '-2';
+	data.datasets[0].fill = '3';
+	data.datasets[1].fill = '2';
+	data.datasets[2].fill = '0';
 	data.datasets[3].fill = 'origin';
-
-	data.datasets[0].order = 2;
-	data.datasets[1].order = 2;
-	data.datasets[2].order = 2;
-	data.datasets[3].order = 1;
 
 	const config = createConfigObject('line', data, {
 		scales: {
 			y: {
-				min: 0
+				min: 0,
+				ticks: {
+					callback: function (value) {
+						return value + '%';
+					}
+				}
 			}
 		}
 	});
@@ -46,10 +55,10 @@ Spreadsheet.fetch(url, (file) => {
 
 	// Funciones para actualizar el gráfico
 	updateGraph(graph, [
-		file.readRow(12, '4', 'Hoja1'),
-		file.readRow(12, '5', 'Hoja1'),
-		file.readRow(12, '6', 'Hoja1'),
-		file.readRow(12, '7', 'Hoja1').nullify()
+		rows.hoja1.preescolar,
+		rows.hoja1.primaria,
+		rows.hoja1.secundaria,
+		rows.hoja1.terciaria
 	]);
 
 	// Funciones para descargar

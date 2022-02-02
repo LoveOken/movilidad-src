@@ -12,7 +12,7 @@ const url = document.getElementsByName('sheet-url')[0].content;
 
 /* set up async GET request */
 Spreadsheet.fetch(url, (file) => {
-	const data = createDataObject(file.readColumn(4, 20, 'A', 'Hoja1').cells, [
+	const data = createDataObject(file.readColumn(4, 21, 'A', 'Hoja1').cells, [
 		colors.blue,
 		colors.orange
 	]);
@@ -34,6 +34,8 @@ Spreadsheet.fetch(url, (file) => {
 		}
 	});
 
+	config.options.aspectRatio = 1.4;
+
 	// Obtiene elementos de la página
 	const canvas = document.getElementById('chart');
 	const imgButton = document.getElementById('img-button');
@@ -43,8 +45,8 @@ Spreadsheet.fetch(url, (file) => {
 
 	// Funciones para actualizar el gráfico
 	updateGraph(graph, [
-		file.readColumn(4, 20, 'N', 'Hoja1').invert(),
-		file.readColumn(4, 20, 'O', 'Hoja1')
+		file.readColumn(4, 21, 'O', 'Hoja1').invert(),
+		file.readColumn(4, 21, 'N', 'Hoja1')
 	]);
 
 	// Funciones para descargar

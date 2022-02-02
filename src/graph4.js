@@ -13,7 +13,7 @@ const url = document.getElementsByName('sheet-url')[0].content;
 /* set up async GET request */
 Spreadsheet.fetch(url, (file) => {
 	const data = createDataObject(file.readColumn(3, 20, 'A', 'Hoja1').shift().cells, [
-		colors.blue
+		colors.orange
 	]);
 
 	const config = createConfigObject('bar', data, {
