@@ -1,8 +1,8 @@
-module.exports = (axis, chart, multiplier = 1) => {
-	chart.options.scales[axis].ticks.callback = function (value) {
+module.exports = function (axis, multiplier = 1) {
+	this.options.scales[axis].ticks.callback = function (value) {
 		return value * multiplier + '%';
 	};
-	chart.options.plugins.tooltip.callbacks.label = function (context) {
+	this.options.plugins.tooltip.callbacks.label = function (context) {
 		let label = context.dataset.label || '';
 
 		if (label) {

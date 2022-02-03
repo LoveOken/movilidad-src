@@ -1,5 +1,5 @@
 module.exports = (hex) => {
-	const config = {
+	return {
 		label: 'Cargando…',
 		fill: true,
 		borderWidth: 1,
@@ -7,6 +7,4 @@ module.exports = (hex) => {
 		backgroundColor: hex + '10',
 		data: []
 	};
-
-	return config;
 };

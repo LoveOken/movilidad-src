@@ -1,5 +1,5 @@
 /* global Chart */
-const colors = require('./colors');
+const colors = require('../common/colors');
 const customBackground = require('./customBackground');
 
 module.exports = (type, data, options = {}) => {
