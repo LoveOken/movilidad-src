@@ -10,7 +10,7 @@ module.exports = function (axis, multiplier = 1) {
 		}
 
 		if (context.parsed[axis] !== null) {
-			label += parseFloat(context.parsed[axis] * multiplier).toFixed(2) + '%';
+			label += parseFloat(context.parsed[axis] * multiplier).toFixed(1) + '%';
 		}
 
 		return label;

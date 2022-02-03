@@ -12,6 +12,7 @@ module.exports = (type, data, options = {}) => {
 		type,
 		data,
 		options: {
+			maintainAspectRatio: true,
 			aspectRatio: 1.2,
 			elements: {
 				point: {
@@ -42,7 +43,7 @@ module.exports = (type, data, options = {}) => {
 					position: 'bottom',
 					align: 'start',
 					font: {
-						size: 9,
+						size: 10,
 						color: '#000'
 					}
 				},

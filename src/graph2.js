@@ -10,7 +10,7 @@ createChart(
 		options: {
 			scales: {
 				y: {
-					min: 90,
+					min: 0,
 					max: 100
 				}
 			}
@@ -38,22 +38,29 @@ createChart(
 		},
 		onFetch: (rows, select, display) => {
 			select.onchange = () => {
-				let sheet;
+				let sheet, subtitle;
 
 				if (select.value == 1) {
 					sheet = rows.hoja1;
+					subtitle = ' (15 años o más)';
 				} else {
 					sheet = rows.hoja2;
+					subtitle = ' (15 a 24 años)';
 				}
+
+				display.title(
+					'Ecuador - Tasa de alfabetización',
+					'Porcentaje de personas por año.' + subtitle,
+					[
+						'Fuente: World Development Indicators v.4, The World Bank.',
+						'https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators.',
+						'Fecha de descarga: 6 Diciembre, 2021'
+					]
+				);
 
 				display.update(Object.values(sheet));
 			};
 
-			display.title('Ecuador - Tasa de alfabetización', 'Porcentaje de personas por año.', [
-				'Fuente: World Development Indicators v.4, The World Bank.',
-				'https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators.',
-				'Fecha de descarga: 6 Diciembre, 2021'
-			]);
 			display.percentage('y');
 			select.onchange();
 		}

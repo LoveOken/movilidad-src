@@ -9,7 +9,8 @@ createChart(
 		type: 'line',
 		options: {
 			y: {
-				stacked: true
+				stacked: true,
+				min: 0
 			}
 		},
 		ticks: 12
@@ -49,11 +50,9 @@ createChart(
 				if (select.value == 1) {
 					sheet = rows.hoja1;
 					display.normal('y');
-					display.zero(true);
 				} else {
 					sheet = rows.hoja2;
 					display.percentage('y', 100);
-					display.zero(false);
 				}
 
 				display.update(Object.values(sheet));
