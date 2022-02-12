@@ -1,7 +1,12 @@
 module.exports = function (axis) {
-	this.options.scales[axis].ticks.callback = function (value) {
-		return Math.abs(value);
+	const thousands = function (value) {
+		return Math.abs(value)
+			.toString()
+			.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 	};
+
+	this.options.scales[axis].ticks.callback = thousands;
+
 	this.options.plugins.tooltip.callbacks.label = function (context) {
 		let label = context.dataset.label || '';
 
@@ -10,7 +15,7 @@ module.exports = function (axis) {
 		}
 
 		if (context.parsed[axis] !== null) {
-			label += Math.abs(context.parsed[axis]);
+			label += thousands(context.parsed[axis]);
 		}
 
 		return label;

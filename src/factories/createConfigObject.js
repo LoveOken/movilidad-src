@@ -44,7 +44,7 @@ module.exports = (type, data, options = {}) => {
 					align: 'start',
 					font: {
 						size: 10,
-						color: '#000'
+						color: colors.black
 					}
 				},
 				legend: {
@@ -59,7 +59,7 @@ module.exports = (type, data, options = {}) => {
 						align: 'start',
 						font: {
 							size: 13,
-							color: '#000'
+							color: colors.black
 						}
 					}
 				},

@@ -3,9 +3,15 @@ const createChart = require('./factories/createChart');
 
 createChart(
 	{
-		url: document.getElementsByName('sheet-url')[0].content,
 		name: 'graf7',
-		colors: [colors.orange, colors.cyan, colors.navy],
+		colors: [
+			colors.orange,
+			colors.orange2,
+			colors.orange3,
+			colors.orange4,
+			colors.cyan,
+			colors.navy
+		],
 		type: 'line',
 		options: {
 			y: {
@@ -21,11 +27,17 @@ createChart(
 				etiquetas: file.readRow(13, '3', 'Hoja1').cells,
 				hoja1: {
 					ecuador: file.readRow(13, '4', 'Hoja1'),
+					colombia: file.readRow(13, '5', 'Hoja1'),
+					peru: file.readRow(13, '8', 'Hoja1'),
+					venezuela: file.readRow(13, '9', 'Hoja1'),
 					otrosPaises: file.readRow(13, '6', 'Hoja1'),
 					otrosContinentes: file.readRow(13, '7', 'Hoja1')
 				},
 				hoja2: {
 					ecuador: file.readRow(13, '4', 'Hoja2'),
+					colombia: file.readRow(13, '5', 'Hoja2'),
+					peru: file.readRow(13, '8', 'Hoja2'),
+					venezuela: file.readRow(13, '9', 'Hoja2'),
 					otrosPaises: file.readRow(13, '6', 'Hoja2'),
 					otrosContinentes: file.readRow(13, '7', 'Hoja2')
 				}
@@ -39,9 +51,16 @@ createChart(
 			}
 		},
 		setFills: (data) => {
-			data.datasets[0].fill = 'origin';
-			data.datasets[1].fill = '-1';
-			data.datasets[2].fill = '-1';
+			let i = 0;
+			for (const dataset of data.datasets) {
+				if (i > 0) {
+					dataset.fill = '-1';
+				} else {
+					dataset.fill = 'origin';
+				}
+
+				i++;
+			}
 		},
 		onFetch: (rows, select, display) => {
 			select.onchange = () => {
@@ -50,9 +69,11 @@ createChart(
 				if (select.value == 1) {
 					sheet = rows.hoja1;
 					display.normal('y');
+					display.zero(true);
 				} else {
 					sheet = rows.hoja2;
 					display.percentage('y', 100);
+					display.zero(false);
 				}
 
 				display.update(Object.values(sheet));

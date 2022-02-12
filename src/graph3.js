@@ -3,7 +3,6 @@ const createChart = require('./factories/createChart');
 
 createChart(
 	{
-		url: document.getElementsByName('sheet-url')[0].content,
 		name: 'graf3',
 		colors: [colors.orange],
 		type: 'line',

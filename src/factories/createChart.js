@@ -16,9 +16,10 @@ const saveExcelFile = require('../downloaders/saveExcelFile');
 const displayAtZero = require('../display/displayAtZero');
 
 module.exports = (
-	{ url, name = 'none', colors, type, options, ticks, labels = true },
+	{ name = 'none', colors, type, options, ticks, labels = true },
 	{ getRows, getFilename, setFills, onFetch }
 ) => {
+	const url = document.getElementsByName(name + '-sheet-url')[0].content;
 	const canvas = document.getElementById(name + '-chart');
 	const select = document.getElementById(name + '-select');
 	const imgButton = document.getElementById(name + '-img-button');
