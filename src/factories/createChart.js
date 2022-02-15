@@ -14,6 +14,7 @@ const hideLabels = require('../display/hideLabels');
 const saveAsImg = require('../downloaders/saveAsImg');
 const saveExcelFile = require('../downloaders/saveExcelFile');
 const displayAtZero = require('../display/displayAtZero');
+const dynamicAspectRatio = require('../display/dynamicAspectRatio');
 
 module.exports = (
 	{ name = 'none', colors, type, options, ticks, labels = true },
@@ -60,5 +61,14 @@ module.exports = (
 		fileButton.onclick = () => {
 			saveExcelFile(url);
 		};
+
+		const handler = () => {
+			dynamicAspectRatio(chart.config, canvas);
+
+			chart.update();
+		};
+
+		window.addEventListener('resize', handler);
+		handler();
 	});
 };

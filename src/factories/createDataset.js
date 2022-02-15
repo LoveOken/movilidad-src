@@ -1,6 +1,6 @@
 module.exports = (hex) => {
 	return {
-		label: 'Cargando…',
+		label: '',
 		fill: true,
 		borderWidth: 1,
 		borderColor: hex,

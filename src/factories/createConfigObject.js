@@ -4,7 +4,6 @@ const customBackground = require('./customBackground');
 
 module.exports = (type, data, options = {}) => {
 	Chart.defaults.font.family = "'Open Sans', sans-serif";
-	Chart.defaults.font.size = 11;
 	Chart.defaults.font.weight = 300;
 	Chart.defaults.font.color = colors.gray;
 
@@ -13,7 +12,7 @@ module.exports = (type, data, options = {}) => {
 		data,
 		options: {
 			maintainAspectRatio: true,
-			aspectRatio: 1.2,
+			aspectRatio: 1,
 			elements: {
 				point: {
 					radius: 0,
@@ -26,25 +25,23 @@ module.exports = (type, data, options = {}) => {
 			plugins: {
 				title: {
 					display: true,
-					text: 'Cargando...',
-					color: colors.cyan,
+					text: '',
 					position: 'top',
 					align: 'start',
-					padding: 10,
+					color: colors.cyan,
+					padding: 12,
 					font: {
-						size: 15,
 						family: "'Josefin Sans', sans-serif"
 					}
 				},
 				subtitle: {
 					display: true,
-					padding: 10,
-					text: 'Cargando...',
+					text: '',
 					position: 'bottom',
 					align: 'start',
+					padding: 12,
 					font: {
-						size: 10,
-						color: colors.black
+						weight: 400
 					}
 				},
 				legend: {
@@ -55,11 +52,9 @@ module.exports = (type, data, options = {}) => {
 					},
 					title: {
 						display: true,
-						text: 'Cargando...',
-						align: 'start',
+						text: '',
 						font: {
-							size: 13,
-							color: colors.black
+							weight: 400
 						}
 					}
 				},
