@@ -12,7 +12,7 @@ module.exports = (type, data, options = {}) => {
 		data,
 		options: {
 			maintainAspectRatio: true,
-			aspectRatio: 1,
+			aspectRatio: 1.2,
 			elements: {
 				point: {
 					radius: 0,

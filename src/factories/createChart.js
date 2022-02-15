@@ -62,13 +62,18 @@ module.exports = (
 			saveExcelFile(url);
 		};
 
+		let to;
+
 		const handler = () => {
 			dynamicAspectRatio(chart.config, canvas);
 
 			chart.update();
 		};
 
-		window.addEventListener('resize', handler);
+		window.addEventListener('resize', function () {
+			clearTimeout(to);
+			to = setTimeout(handler, 100);
+		});
 		handler();
 	});
 };
