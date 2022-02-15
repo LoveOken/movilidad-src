@@ -80,7 +80,7 @@ createChart(
 			};
 
 			display.title(
-				'Ecuador - Estudiantes matriculados en el sistema educativo',
+				['Ecuador - Estudiantes matriculados', 'en el sistema educativo'],
 				'Distribución por nacionalidad por ciclo.',
 				''
 			);

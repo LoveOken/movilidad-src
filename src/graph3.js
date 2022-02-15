@@ -56,7 +56,7 @@ createChart(
 				}
 
 				display.title(
-					'Ecuador - Logro educativo en población de 25 años o más',
+					['Ecuador - Logro educativo en población', 'de 25 años o más'],
 					'Porcentaje total acumulado por año.' + subtitle,
 					[
 						'Fuente: World Development Indicators v.4, The World Bank.',

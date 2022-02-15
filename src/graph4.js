@@ -28,7 +28,7 @@ createChart(
 		getFilename: () => 'poblacion_total_migrante_2020.png',
 		onFetch: (rows, select, display) => {
 			display.title(
-				'Ecuador - Distribución de población migrante por grupo etario',
+				['Ecuador - Distribución de población migrante', 'por grupo etario'],
 				'Total a mediados de 2020.',
 				[
 					'United Nations Department of Economic and Social Affairs, Population Division (2020).',
