@@ -55,7 +55,7 @@ module.exports = (
 		imgButton.onclick = () => {
 			const filename = getFilename(select);
 
-			saveAsImg(filename, canvas);
+			saveAsImg(filename + '.png', canvas);
 		};
 
 		fileButton.onclick = () => {

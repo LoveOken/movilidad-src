@@ -1,6 +1,6 @@
-module.exports = function (axis, multiplier = 1) {
+module.exports = function (axis, multiplier = 1, fixed = 0) {
 	this.options.scales[axis].ticks.callback = function (value) {
-		return value * multiplier + '%';
+		return parseFloat(value * multiplier).toFixed(fixed) + '%';
 	};
 	this.options.plugins.tooltip.callbacks.label = function (context) {
 		let label = context.dataset.label || '';

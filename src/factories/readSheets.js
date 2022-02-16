@@ -1,5 +1,7 @@
 /* global XLSX */
 
+const translateLabels = require('../common/translateLabels');
+
 class Spreadsheet {
 	constructor(arr) {
 		this.sheets = XLSX.read(new Uint8Array(arr), { type: 'array' }).Sheets;
@@ -44,7 +46,7 @@ class Spreadsheet {
 			const value = this.readValue(cell, sheetname);
 
 			if (i === 0) {
-				label = value;
+				label = translateLabels(value);
 			} else {
 				cells.push(value);
 			}
@@ -62,7 +64,7 @@ class Spreadsheet {
 			const value = this.readValue(cell, sheetname);
 
 			if (i === start) {
-				label = value;
+				label = translateLabels(value);
 			} else {
 				cells.push(value);
 			}

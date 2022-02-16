@@ -1,5 +1,9 @@
 const colors = require('./common/colors');
+const englishTitles = require('./common/englishTitles');
+const spanishTitles = require('./common/spanishTitles');
 const createChart = require('./factories/createChart');
+
+const lang = document.documentElement.lang === 'es' ? spanishTitles : englishTitles;
 
 createChart(
 	{
@@ -45,9 +49,9 @@ createChart(
 		},
 		getFilename: (select) => {
 			if (select.value == 1) {
-				return 'total_estudiantes_matriculados.png';
+				return lang.title7.join(' ') + ' (' + lang.subtitle7a + ')';
 			} else {
-				return 'distribucion_estudiantes_matriculados.png';
+				return lang.title7.join(' ') + ' (' + lang.subtitle7b + ')';
 			}
 		},
 		setFills: (data) => {
@@ -64,26 +68,23 @@ createChart(
 		},
 		onFetch: (rows, select, display) => {
 			select.onchange = () => {
-				let sheet;
+				let sheet, subtitle;
 
 				if (select.value == 1) {
 					sheet = rows.hoja1;
+					subtitle = lang.subtitle7a;
 					display.normal('y');
 					display.zero(true);
 				} else {
 					sheet = rows.hoja2;
-					display.percentage('y', 100);
+					subtitle = lang.subtitle7b;
 					display.zero(false);
 				}
 
+				display.title(lang.title7, subtitle, '');
 				display.update(Object.values(sheet));
 			};
 
-			display.title(
-				['Ecuador - Estudiantes matriculados', 'en el sistema educativo'],
-				'Distribución por nacionalidad por ciclo.',
-				''
-			);
 			select.onchange();
 		}
 	}

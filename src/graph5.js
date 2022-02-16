@@ -1,5 +1,9 @@
 const colors = require('./common/colors');
+const englishTitles = require('./common/englishTitles');
+const spanishTitles = require('./common/spanishTitles');
 const createChart = require('./factories/createChart');
+
+const lang = document.documentElement.lang === 'es' ? spanishTitles : englishTitles;
 
 createChart(
 	{
@@ -30,17 +34,9 @@ createChart(
 				}
 			};
 		},
-		getFilename: () => 'poblacion_migrante_por_edad_y_sexo_2020.png',
+		getFilename: () => lang.title5.join(' '),
 		onFetch: (rows, select, display) => {
-			display.title(
-				['Ecuador - Distribución de población migrante', 'por grupo etario y sexo'],
-				'Total a mediados de 2020.',
-				[
-					'United Nations Department of Economic and Social Affairs, Population Division (2020).',
-					'International Migrant Stock 2020 https://www.un.org/development/desa/pd/content/international-migrant-stock.',
-					'Fecha de descarga: 6 Diciembre, 2021'
-				]
-			);
+			display.title(lang.title5, lang.subtitle4n5, lang.source2);
 			display.absolute('x');
 			display.update(Object.values(rows.hoja1));
 		}

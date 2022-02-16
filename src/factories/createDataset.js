@@ -4,7 +4,7 @@ module.exports = (hex) => {
 		fill: true,
 		borderWidth: 1,
 		borderColor: hex,
-		backgroundColor: hex + '10',
+		backgroundColor: hex + 'AA',
 		data: []
 	};
 };

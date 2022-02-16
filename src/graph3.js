@@ -1,5 +1,9 @@
 const colors = require('./common/colors');
+const englishTitles = require('./common/englishTitles');
+const spanishTitles = require('./common/spanishTitles');
 const createChart = require('./factories/createChart');
+
+const lang = document.documentElement.lang === 'es' ? spanishTitles : englishTitles;
 
 createChart(
 	{
@@ -33,11 +37,11 @@ createChart(
 		},
 		getFilename: (select) => {
 			if (select.value == 1) {
-				return 'logro_educativo_primaria.png';
+				return lang.title3.join(' ') + lang.subtitle3a;
 			} else if (select.value == 2) {
-				return 'logro_educativo_secundaria_baja.png';
+				return lang.title3.join(' ') + lang.subtitle3b;
 			} else {
-				return 'logro_educativo_secundaria_alta.png';
+				return lang.title3.join(' ') + lang.subtitle3c;
 			}
 		},
 		onFetch: (rows, select, display) => {
@@ -46,24 +50,16 @@ createChart(
 
 				if (select.value == 1) {
 					sheet = rows.hoja1;
-					subtitle = ' (Al menos primaria completa)';
+					subtitle = lang.subtitle3a;
 				} else if (select.value == 2) {
 					sheet = rows.hoja2;
-					subtitle = ' (Al menos secundaria baja completa)';
+					subtitle = lang.subtitle3b;
 				} else {
 					sheet = rows.hoja3;
-					subtitle = ' (Al menos secundaria alta completa)';
+					subtitle = lang.subtitle3c;
 				}
 
-				display.title(
-					['Ecuador - Logro educativo en población', 'de 25 años o más'],
-					'Porcentaje total acumulado por año.' + subtitle,
-					[
-						'Fuente: World Development Indicators v.4, The World Bank.',
-						'https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators.',
-						'Fecha de descarga: 6 Diciembre, 2021'
-					]
-				);
+				display.title(lang.title3, lang.subtitle3 + subtitle, lang.source1);
 
 				display.update(Object.values(sheet));
 			};

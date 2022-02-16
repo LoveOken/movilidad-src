@@ -7,6 +7,4 @@ module.exports = (config, canvas) => {
 	config.options.plugins.title.font.size = 21 * factor;
 	config.options.plugins.legend.title.font.size = 14 * factor;
 	config.options.plugins.subtitle.font.size = 12 * factor;
-
-	console.log(config.options.aspectRatio, canvas.offsetWidth);
 };

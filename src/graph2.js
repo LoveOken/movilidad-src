@@ -1,5 +1,9 @@
 const colors = require('./common/colors');
+const englishTitles = require('./common/englishTitles');
+const spanishTitles = require('./common/spanishTitles');
 const createChart = require('./factories/createChart');
+
+const lang = document.documentElement.lang === 'es' ? spanishTitles : englishTitles;
 
 createChart(
 	{
@@ -30,9 +34,9 @@ createChart(
 		},
 		getFilename: (select) => {
 			if (select.value == 1) {
-				return 'alfabetizacion_15_años_o_mas.png';
+				return lang.title2 + lang.subtitle2a;
 			} else {
-				return 'alfabetizacion_15_a_24_años.png';
+				return lang.title2 + lang.subtitle2b;
 			}
 		},
 		onFetch: (rows, select, display) => {
@@ -41,21 +45,13 @@ createChart(
 
 				if (select.value == 1) {
 					sheet = rows.hoja1;
-					subtitle = ' (15 años o más)';
+					subtitle = lang.subtitle2a;
 				} else {
 					sheet = rows.hoja2;
-					subtitle = ' (15 a 24 años)';
+					subtitle = lang.subtitle2b;
 				}
 
-				display.title(
-					'Ecuador - Tasa de alfabetización',
-					'Porcentaje de personas por año.' + subtitle,
-					[
-						'Fuente: World Development Indicators v.4, The World Bank.',
-						'https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators.',
-						'Fecha de descarga: 6 Diciembre, 2021'
-					]
-				);
+				display.title(lang.title2, lang.subtitle2 + subtitle, lang.source1);
 
 				display.update(Object.values(sheet));
 			};

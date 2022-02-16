@@ -1,10 +1,14 @@
 const colors = require('./common/colors');
+const englishTitles = require('./common/englishTitles');
+const spanishTitles = require('./common/spanishTitles');
 const createChart = require('./factories/createChart');
+
+const lang = document.documentElement.lang === 'es' ? spanishTitles : englishTitles;
 
 createChart(
 	{
 		name: 'graf1',
-		colors: [colors.gray, colors.cyan, colors.navy, colors.orange],
+		colors: [colors.navy, colors.blue, colors.cyan, colors.orange],
 		type: 'line',
 		options: {
 			scales: {
@@ -27,7 +31,7 @@ createChart(
 				}
 			};
 		},
-		getFilename: () => 'matriculacion_por_nivel_educacional.png',
+		getFilename: () => lang.title1,
 		setFills: (data) => {
 			data.datasets[0].fill = '3';
 			data.datasets[1].fill = '2';
@@ -36,11 +40,7 @@ createChart(
 		},
 		onFetch: (rows, select, display) => {
 			// Funciones para actualizar el gráfico
-			display.title('Ecuador - Matriculación Escolar', 'Porcentaje bruto por año.', [
-				'Fuente: World Development Indicators v.4, The World Bank.',
-				'https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators.',
-				'Fecha de descarga: 6 Diciembre, 2021'
-			]);
+			display.title(lang.title1, lang.subtitle1, lang.source1);
 
 			display.percentage('y');
 			display.update(Object.values(rows.hoja1));
