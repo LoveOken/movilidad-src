@@ -13,31 +13,42 @@ const hideLabels = require('../display/hideLabels');
 
 const saveAsImg = require('../downloaders/saveAsImg');
 const saveExcelFile = require('../downloaders/saveExcelFile');
-const displayAtZero = require('../display/displayAtZero');
+const displayZeroToHundred = require('../display/displayZeroToHundred');
 const dynamicAspectRatio = require('../display/dynamicAspectRatio');
+
+/**
+ * Crea un gráfico utilizando Chart.js leyendo los datos de un archivo XSLX
+ * @param {*} propiedades Propiedades del gráfico
+ * @param {*} metodos Métodos del gráfico
+ */
 
 module.exports = (
 	{ name = 'none', colors, type, options, ticks, labels = true },
-	{ getRows, getFilename, setFills, onFetch }
+	{ getData, getFilename, setFills, onFetch }
 ) => {
+	// Busca los elementos utilizando el nombre dado en propiedades
 	const url = document.getElementsByName(name + '-sheet-url')[0].content;
 	const canvas = document.getElementById(name + '-chart');
 	const select = document.getElementById(name + '-select');
 	const imgButton = document.getElementById(name + '-img-button');
 	const fileButton = document.getElementById(name + '-file-button');
 
-	// Configura el gráfico en particular
+	// Crea los objetos de configuración que utiliza ChartJS
 	const data = createDataObject(new Array(ticks).fill(''), colors);
 	const config = createConfigObject(type, data, options);
 
+	// Arregla los rellenos de los gráficos si hay una función para aquello
 	if (setFills) setFills(data);
+
+	// Oculta las etiquetas en caso de que no sean necesarias
 	if (!labels) hideLabels(config);
 
+	// Genera el gráfico con ChartJS
 	const chart = new Chart(canvas, config);
 
 	Spreadsheet.fetch(url, (file) => {
-		// Cambiar estas variables cambiara los datos que se muestran
-		const rows = getRows(file);
+		// Procesa los datos desde el archivo
+		const rows = getData(file);
 
 		data.labels = rows.etiquetas;
 
@@ -48,7 +59,7 @@ module.exports = (
 			percentage: displayAsPercentage.bind(chart),
 			normal: displayNormal.bind(chart),
 			title: displayTitles.bind(chart),
-			zero: displayAtZero.bind(chart)
+			zero: displayZeroToHundred.bind(chart)
 		});
 
 		// Funciones para descargar
@@ -62,6 +73,8 @@ module.exports = (
 			saveExcelFile(url);
 		};
 
+		// Tamaño dinámico de gráfico
+		// Depende del tamaño de la ventana
 		let to;
 
 		const handler = () => {
@@ -74,6 +87,7 @@ module.exports = (
 			clearTimeout(to);
 			to = setTimeout(handler, 100);
 		});
+
 		handler();
 	});
 };

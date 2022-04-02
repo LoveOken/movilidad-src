@@ -2,6 +2,14 @@
 const colors = require('../common/colors');
 const customBackground = require('./customBackground');
 
+/**
+ * Crea un objeto de configuración de ChartJS
+ * @param {String} type Tipo de gráfico
+ * @param {*} data Objeto de datos
+ * @param {*} options Opciones adicionales
+ * @returns {*} Objeto de configuration
+ */
+
 module.exports = (type, data, options = {}) => {
 	Chart.defaults.font.family = "'Open Sans', sans-serif";
 	Chart.defaults.font.weight = 300;

@@ -26,7 +26,7 @@ createChart(
 		ticks: 12
 	},
 	{
-		getRows: (file) => {
+		getData: (file) => {
 			return {
 				etiquetas: file.readRow(13, '3', 'Hoja1').cells,
 				hoja1: {

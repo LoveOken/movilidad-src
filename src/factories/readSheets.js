@@ -37,15 +37,15 @@ class Spreadsheet {
 		};
 	}
 
-	readRow(length, row, sheetname) {
+	readRow(start, end, row, sheetname) {
 		let label;
 		const cells = [];
 
-		for (let i = 0; i < length; i++) {
+		for (let i = start; i < end; i++) {
 			const cell = String.fromCharCode(i + 65) + row;
 			const value = this.readValue(cell, sheetname);
 
-			if (i === 0) {
+			if (i === start) {
 				label = translateLabels(value);
 			} else {
 				cells.push(value);

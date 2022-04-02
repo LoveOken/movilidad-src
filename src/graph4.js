@@ -21,7 +21,7 @@ createChart(
 		labels: false
 	},
 	{
-		getRows: (file) => {
+		getData: (file) => {
 			return {
 				etiquetas: file.readColumn(3, 21, 'A', 'Hoja1').shift().cells,
 				hoja1: {

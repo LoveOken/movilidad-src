@@ -22,7 +22,7 @@ createChart(
 		labels: false
 	},
 	{
-		getRows: (file) => {
+		getData: (file) => {
 			return {
 				etiquetas: file.readRow(8, '3', 'Hoja1').cells,
 				hoja1: {
