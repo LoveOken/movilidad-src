@@ -1,11 +1,11 @@
 module.exports = {
-	title1: 'Ecuador - School enrollment',
-	title2: 'Ecuador - Literacy rate',
-	title3: ['Ecuador - Educational attainment', 'for population 25+ years'],
-	title4: ['Ecuador - International migrant stock', 'by age'],
-	title5: ['Ecuador - International migrant stock', 'by age and gender'],
-	title6: 'Ecuador - International migrant stock over time',
-	title7: ['Ecuador - Ratio of foreign students', 'enrolled in the educational system'],
+	title1: '{c} - School enrollment',
+	title2: '{c} - Literacy rate',
+	title3: ['{c} - Educational attainment', 'for population 25+ years'],
+	title4: ['{c} - International migrant stock', 'by age'],
+	title5: ['{c} - International migrant stock', 'by age and gender'],
+	title6: '{c} - International migrant stock over time',
+	title7: ['{c} - Ratio of foreign students', 'enrolled in the educational system'],
 	subtitle1: '% gross by year',
 	subtitle2: '% of people by year',
 	subtitle2a: ' (People ages 15 and above)',
@@ -27,5 +27,11 @@ module.exports = {
 		'Source: United Nations Department of Economic and Social Affairs, Population Division (2020).',
 		'International Migrant Stock 2020 https://www.un.org/development/desa/pd/content/international-migrant-stock.',
 		'Download date: December 6, 2021'
-	]
+	],
+	country: {
+		cl: 'Chile',
+		co: 'Colombia',
+		ec: 'Ecuador',
+		uy: 'Uruguay'
+	}
 };

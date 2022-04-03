@@ -1,3 +1,7 @@
+/**
+ * Color de fondo para el canvas
+ */
+
 module.exports = {
 	id: 'custom_canvas_background_color',
 	beforeDraw: (chart) => {

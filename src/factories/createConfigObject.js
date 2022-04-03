@@ -11,6 +11,7 @@ const customBackground = require('./customBackground');
  */
 
 module.exports = (type, data, options = {}) => {
+	// Efectos de tipografía global
 	Chart.defaults.font.family = "'Open Sans', sans-serif";
 	Chart.defaults.font.weight = 300;
 	Chart.defaults.font.color = colors.gray;
@@ -18,6 +19,7 @@ module.exports = (type, data, options = {}) => {
 	return {
 		type,
 		data,
+		// Layout básico
 		options: {
 			maintainAspectRatio: true,
 			aspectRatio: 1.2,
@@ -30,6 +32,7 @@ module.exports = (type, data, options = {}) => {
 			layout: {
 				padding: 15
 			},
+			// Plugins y tipografía
 			plugins: {
 				title: {
 					display: true,

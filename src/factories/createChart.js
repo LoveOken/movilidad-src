@@ -27,11 +27,19 @@ module.exports = (
 	{ getData, getFilename, setFills, onFetch }
 ) => {
 	// Busca los elementos utilizando el nombre dado en propiedades
-	const url = document.getElementsByName(name + '-sheet-url')[0].content;
 	const canvas = document.getElementById(name + '-chart');
 	const select = document.getElementById(name + '-select');
 	const imgButton = document.getElementById(name + '-img-button');
 	const fileButton = document.getElementById(name + '-file-button');
+
+	if (!canvas) {
+		console.log(`Gráfico ${name} no existe.`);
+		return false;
+	}
+
+	// Obtiene los datos otorgados al canvas
+	const url = canvas.getAttribute('data-url');
+	const country = canvas.getAttribute('data-pais');
 
 	// Crea los objetos de configuración que utiliza ChartJS
 	const data = createDataObject(new Array(ticks).fill(''), colors);
@@ -48,12 +56,12 @@ module.exports = (
 
 	Spreadsheet.fetch(url, (file) => {
 		// Procesa los datos desde el archivo
-		const rows = getData(file);
+		const rows = getData(file, country);
 
 		data.labels = rows.etiquetas;
 
 		// Funciones para actualizar el gráfico
-		onFetch(rows, select, {
+		onFetch(rows, country, select, {
 			update: displayUpdate.bind(chart),
 			absolute: displayAsAbsolute.bind(chart),
 			percentage: displayAsPercentage.bind(chart),
@@ -64,7 +72,7 @@ module.exports = (
 
 		// Funciones para descargar
 		imgButton.onclick = () => {
-			const filename = getFilename(select);
+			const filename = getFilename(country, select);
 
 			saveAsImg(filename + '.png', canvas);
 		};

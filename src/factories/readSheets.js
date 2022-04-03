@@ -2,22 +2,30 @@
 
 const translateLabels = require('../common/translateLabels');
 
+/**
+ * Objeto que representa al archivo excel
+ */
+
 class Spreadsheet {
 	constructor(arr) {
-		this.sheets = XLSX.read(new Uint8Array(arr), { type: 'array' }).Sheets;
+		const workbook = XLSX.read(new Uint8Array(arr), { type: 'array' });
+		const worksheet = workbook.Sheets['Hoja 1'];
+
+		this.data = XLSX.utils.sheet_to_json(worksheet);
+
+		console.log(this.data, Object.keys(this.data[0]));
 	}
 
-	readValue(cell, sheetname) {
-		try {
-			return this.sheets[sheetname][cell].v;
-		} catch (err) {
-			return undefined;
-		}
-	}
+	/**
+	 * Crear un set de valores que se pueden utilizar para representar en el gráfico
+	 * @param {String} label Etiqueta
+	 * @param {Array<Number>} cells Valores
+	 * @returns {*} Set de valores
+	 */
 
 	createValues(label, cells) {
 		return {
-			label,
+			label: translateLabels(label),
 			cells,
 			shift: function () {
 				this.cells.shift();
@@ -37,40 +45,26 @@ class Spreadsheet {
 		};
 	}
 
-	readRow(start, end, row, sheetname) {
-		let label;
-		const cells = [];
+	/**
+	 * Busca una fila del archivo y genera valores usables en el gráfico
+	 * @param {String} code Codigo del país
+	 * @param {String} param Nombre de la variable a buscar
+	 * @param {Array<String>} labels
+	 * @returns
+	 */
 
-		for (let i = start; i < end; i++) {
-			const cell = String.fromCharCode(i + 65) + row;
-			const value = this.readValue(cell, sheetname);
+	readRow(code, param, labels) {
+		const row = this.data.find((r) => r.cod_pais === code && r.parametro === param);
 
-			if (i === start) {
-				label = translateLabels(value);
-			} else {
-				cells.push(value);
-			}
+		if (row) {
+			const values = labels.map((v) => row[v]);
+
+			return this.createValues(param, values);
+		} else {
+			throw new Error(
+				'The country code/parameter is invalid - El código país/parametro es invalido.'
+			);
 		}
-
-		return this.createValues(label, cells);
-	}
-
-	readColumn(start, end, column, sheetname) {
-		let label;
-		const cells = [];
-
-		for (let i = start; i < end; i++) {
-			const cell = column + i;
-			const value = this.readValue(cell, sheetname);
-
-			if (i === start) {
-				label = translateLabels(value);
-			} else {
-				cells.push(value);
-			}
-		}
-
-		return this.createValues(label, cells);
 	}
 
 	static fetch(url, cb) {

@@ -1,11 +1,11 @@
 module.exports = {
-	title1: 'Ecuador - Matriculación Escolar',
-	title2: 'Ecuador - Tasa de alfabetización',
-	title3: ['Ecuador - Logro educativo en población', 'de 25 años o más'],
-	title4: ['Ecuador - Distribución de población migrante', 'por grupo etario'],
-	title5: ['Ecuador - Distribución de población migrante', 'por grupo etario y sexo'],
-	title6: 'Ecuador - Población migrante',
-	title7: ['Ecuador - Estudiantes matriculados', 'en el sistema educativo'],
+	title1: '{c} - Matriculación Escolar',
+	title2: '{c} - Tasa de alfabetización',
+	title3: ['{c} - Logro educativo en población', 'de 25 años o más'],
+	title4: ['{c} - Distribución de población migrante', 'por grupo etario'],
+	title5: ['{c} - Distribución de población migrante', 'por grupo etario y sexo'],
+	title6: '{c} - Población migrante',
+	title7: ['{c} - Estudiantes matriculados', 'en el sistema educativo'],
 	subtitle1: 'Porcentaje bruto por año.',
 	subtitle2: 'Porcentaje de personas por año.',
 	subtitle2a: ' (15 años o más)',
@@ -27,5 +27,11 @@ module.exports = {
 		'Fuente: United Nations Department of Economic and Social Affairs, Population Division (2020).',
 		'International Migrant Stock 2020 https://www.un.org/development/desa/pd/content/international-migrant-stock.',
 		'Fecha de descarga: 6 Diciembre, 2021'
-	]
+	],
+	country: {
+		cl: 'Chile',
+		co: 'Colombia',
+		ec: 'Ecuador',
+		uy: 'Uruguay'
+	}
 };

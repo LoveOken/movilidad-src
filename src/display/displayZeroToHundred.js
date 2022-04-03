@@ -1,11 +1,9 @@
 const displayAsPercentage = require('./displayAsPercentage');
 
-module.exports = function (zero) {
-	// this.options.scales.y.beginAtZero = zero;
-
+module.exports = function (isPercentageValue) {
 	let perc = displayAsPercentage.bind(this);
 
-	if (zero) {
+	if (isPercentageValue) {
 		this.options.plugins.legend.onClick = undefined;
 
 		this.options.scales.y.max = undefined;
