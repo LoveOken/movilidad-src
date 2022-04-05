@@ -36,6 +36,13 @@
             </div>
         </div>
     </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (urlParams.has('lang')) {
+            document.documentElement.setAttribute('lang', urlParams.get('lang'));
+        }
+    </script>
     <!-- XLSX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js" integrity="sha512-BMIFH0QGwPdinbGu7AraCzG9T4hKEkcsbbr+Uqv8IY3G5+JTzs7ycfGbz7Xh85ONQsnHYrxZSXgS1Pdo9r7B6w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Chart.js -->
