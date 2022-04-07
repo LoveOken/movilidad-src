@@ -11,4 +11,4 @@ require('./graphs/graph3')(colors, lang, createChart);
 require('./graphs/graph4')(colors, lang, createChart);
 require('./graphs/graph5')(colors, lang, createChart);
 require('./graphs/graph6')(colors, lang, createChart);
-// require('./graph7')(colors, lang, createChart);
+require('./graphs/graph7')(colors, lang, createChart);

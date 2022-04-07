@@ -21,27 +21,42 @@ module.exports = (colors, lang, createChart) => {
 		},
 		{
 			getData: (file) => {
+				const etiquetas = [
+					'2009-2010',
+					'2010-2011',
+					'2011-2012',
+					'2012-2013',
+					'2013-2014',
+					'2014-2015',
+					'2015-2016',
+					'2016-2017',
+					'2017-2018',
+					'2018-2019',
+					'2019-2020',
+					'2020-2021'
+				];
+
 				return {
-					etiquetas: file.readRow(0, 13, '3', 'Hoja1').cells,
+					etiquetas,
 					hoja1: {
-						ecuador: file.readRow(0, 13, '4', 'Hoja1'),
-						colombia: file.readRow(0, 13, '5', 'Hoja1'),
-						peru: file.readRow(0, 13, '8', 'Hoja1'),
-						venezuela: file.readRow(0, 13, '9', 'Hoja1'),
-						otrosPaises: file.readRow(0, 13, '6', 'Hoja1'),
-						otrosContinentes: file.readRow(0, 13, '7', 'Hoja1')
+						ecuador: file.readRow('ec', 'matricula_cantidad', etiquetas),
+						colombia: file.readRow('co', 'matricula_cantidad', etiquetas),
+						peru: file.readRow('pe', 'matricula_cantidad', etiquetas),
+						venezuela: file.readRow('ve', 'matricula_cantidad', etiquetas),
+						otrosPaises: file.readRow('am', 'matricula_cantidad', etiquetas),
+						otrosContinentes: file.readRow('un', 'matricula_cantidad', etiquetas)
 					},
 					hoja2: {
-						ecuador: file.readRow(0, 13, '4', 'Hoja2'),
-						colombia: file.readRow(0, 13, '5', 'Hoja2'),
-						peru: file.readRow(0, 13, '8', 'Hoja2'),
-						venezuela: file.readRow(0, 13, '9', 'Hoja2'),
-						otrosPaises: file.readRow(0, 13, '6', 'Hoja2'),
-						otrosContinentes: file.readRow(0, 13, '7', 'Hoja2')
+						ecuador: file.readRow('ec', 'matricula_porcentaje', etiquetas),
+						colombia: file.readRow('co', 'matricula_porcentaje', etiquetas),
+						peru: file.readRow('pe', 'matricula_porcentaje', etiquetas),
+						venezuela: file.readRow('ve', 'matricula_porcentaje', etiquetas),
+						otrosPaises: file.readRow('am', 'matricula_porcentaje', etiquetas),
+						otrosContinentes: file.readRow('un', 'matricula_porcentaje', etiquetas)
 					}
 				};
 			},
-			getFilename: (select) => {
+			getFilename: (code, select) => {
 				if (select.value == 1) {
 					return lang.title7.join(' ') + ' (' + lang.subtitle7a + ')';
 				} else {
@@ -60,7 +75,7 @@ module.exports = (colors, lang, createChart) => {
 					i++;
 				}
 			},
-			onFetch: (rows, select, display) => {
+			onFetch: (rows, code, select, display) => {
 				select.onchange = () => {
 					let sheet, subtitle;
 
