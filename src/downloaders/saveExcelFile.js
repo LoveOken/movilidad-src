@@ -1,3 +1,8 @@
+/**
+ * Descarga el archivo Excel
+ * @param {String} url URL del archivo
+ */
+
 module.exports = (url) => {
 	if (navigator.msSaveBlob) {
 		fetch(url)

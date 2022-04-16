@@ -1,4 +1,11 @@
 /* global Chart */
+
+/**
+ * Cambia el tamaño de las tipografías de manera dinámica
+ * @param {*} config Configuracion de ChartJS
+ * @param {HTMLCanvasElement} canvas Elemento Canvas
+ */
+
 module.exports = (config, canvas) => {
 	let factor = Math.min(canvas.offsetWidth / 600, 1);
 

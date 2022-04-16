@@ -11,9 +11,8 @@ class Spreadsheet {
 		const workbook = XLSX.read(new Uint8Array(arr), { type: 'array' });
 		const worksheet = workbook.Sheets['Hoja 1'];
 
+		// El atributo data tiene acceso a los datos de Excel
 		this.data = XLSX.utils.sheet_to_json(worksheet);
-
-		console.log(this.data, Object.keys(this.data[0]));
 	}
 
 	/**
@@ -54,9 +53,11 @@ class Spreadsheet {
 	 */
 
 	readRow(code, param, labels) {
+		// Busca en el archivo una fila con el parametro y codigo correspondiente
 		const row = this.data.find((r) => r.cod_pais === code && r.parametro === param);
 
 		if (row) {
+			// Mapea según etiquetas predeterminadas
 			const values = labels.map((v) => row[v]);
 
 			return this.createValues(param, values);
@@ -66,6 +67,12 @@ class Spreadsheet {
 			);
 		}
 	}
+
+	/**
+	 * Busca el archivo excel desde una URL
+	 * @param {String} url URL del archivo
+	 * @param {Function} cb Funcion que manipula el archivo
+	 */
 
 	static fetch(url, cb) {
 		fetch(url)

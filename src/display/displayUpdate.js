@@ -1,3 +1,8 @@
+/**
+ * Actualiza el gráfico
+ * @param {*} rows Datos
+ */
+
 module.exports = function (rows) {
 	let i = 0;
 
