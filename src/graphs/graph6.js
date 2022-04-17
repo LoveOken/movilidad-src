@@ -26,10 +26,10 @@ module.exports = (colors, lang, createChart) => {
 					}
 				};
 			},
-			getFilename: (code) => lang.title6.replace('{c}', lang.country[code]),
+			getFilename: (code) => lang.title6.replace('{c}', lang['country' + code]),
 			onFetch: (rows, code, select, display) => {
 				display.title(
-					lang.title6.replace('{c}', lang.country[code]),
+					lang.title6.replace('{c}', lang['country' + code]),
 					lang.subtitle6,
 					lang.source2
 				);

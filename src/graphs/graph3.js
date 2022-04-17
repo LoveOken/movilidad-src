@@ -44,12 +44,14 @@ module.exports = (colors, lang, createChart) => {
 				};
 			},
 			getFilename: (code, select) => {
+				const title = lang.title3.replace('{c}', lang['country' + code]) + ' ';
+
 				if (select.value == 1) {
-					return lang.title3.join(' ').replace('{c}', lang.country[code]) + lang.subtitle3a;
+					return title + lang.subtitle3a;
 				} else if (select.value == 2) {
-					return lang.title3.join(' ').replace('{c}', lang.country[code]) + lang.subtitle3b;
+					return title + lang.subtitle3b;
 				} else {
-					return lang.title3.join(' ').replace('{c}', lang.country[code]) + lang.subtitle3c;
+					return title + lang.subtitle3c;
 				}
 			},
 			onFetch: (rows, code, select, display) => {
@@ -68,8 +70,8 @@ module.exports = (colors, lang, createChart) => {
 					}
 
 					display.title(
-						lang.title3.map((v) => v.replace('{c}', lang.country[code])),
-						lang.subtitle3 + subtitle,
+						lang.title3.replace('{c}', lang['country' + code]),
+						subtitle,
 						lang.source1
 					);
 

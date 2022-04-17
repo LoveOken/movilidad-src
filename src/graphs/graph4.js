@@ -42,11 +42,11 @@ module.exports = (colors, lang, createChart) => {
 					}
 				};
 			},
-			getFilename: (code) => lang.title4.join(' ').replace('{c}', lang.country[code]),
+			getFilename: (code) => lang.title4.replace('{c}', lang['country' + code]),
 			onFetch: (rows, code, select, display) => {
 				display.title(
-					lang.title4.map((v) => v.replace('{c}', lang.country[code])),
-					lang.subtitle4n5,
+					lang.title4.replace('{c}', lang['country' + code]),
+					lang.subtitle4,
 					lang.source2
 				);
 				display.update(Object.values(rows.hoja1));

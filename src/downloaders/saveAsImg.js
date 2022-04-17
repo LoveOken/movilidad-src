@@ -5,6 +5,8 @@
  */
 
 module.exports = (filename, canvas) => {
+	filename = filename.replace(/{n}/g, ' ');
+
 	// Compatibilidad
 	if (navigator.msSaveBlob) {
 		canvas.toBlob((blob) => navigator.msSaveBlob(blob, filename));

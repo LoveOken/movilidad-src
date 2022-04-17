@@ -57,10 +57,12 @@ module.exports = (colors, lang, createChart) => {
 				};
 			},
 			getFilename: (code, select) => {
+				const title = lang.title7.replace('{c}', lang['country' + code]) + ' ';
+
 				if (select.value == 1) {
-					return lang.title7.join(' ') + ' (' + lang.subtitle7a + ')';
+					return title + lang.subtitle7a;
 				} else {
-					return lang.title7.join(' ') + ' (' + lang.subtitle7b + ')';
+					return title + lang.subtitle7b;
 				}
 			},
 			setFills: (data) => {
@@ -90,7 +92,7 @@ module.exports = (colors, lang, createChart) => {
 						display.zero(false);
 					}
 
-					display.title(lang.title7, subtitle, '');
+					display.title(lang.title7.replace('{c}', lang['country' + code]), subtitle, '');
 					display.update(Object.values(sheet));
 				};
 

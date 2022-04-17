@@ -1,14 +1,23 @@
 const colors = require('./common/colors');
-const englishTitles = require('./common/englishTitles');
-const spanishTitles = require('./common/spanishTitles');
 const createChart = require('./factories/createChart');
+const Spreadsheet = require('./factories/readSheets');
 
-const lang = document.documentElement.lang.startsWith('es') ? spanishTitles : englishTitles;
+const url =
+	'https://cdn.statically.io/gh/LoveOken/movilidad-src/main/spreadsheets/EMAC_Traduccion.xlsx';
 
-require('./graphs/graph1')(colors, lang, createChart);
-require('./graphs/graph2')(colors, lang, createChart);
-require('./graphs/graph3')(colors, lang, createChart);
-require('./graphs/graph4')(colors, lang, createChart);
-require('./graphs/graph5')(colors, lang, createChart);
-require('./graphs/graph6')(colors, lang, createChart);
-require('./graphs/graph7')(colors, lang, createChart);
+Spreadsheet.fetch(url, (file) => {
+	const code = document.documentElement.lang.startsWith('es') ? 'es' : 'en';
+	const lang = {};
+
+	Object.values(file.data).forEach((e) => {
+		lang[e.type + e.id] = e[code];
+	});
+
+	require('./graphs/graph1')(colors, lang, createChart);
+	require('./graphs/graph2')(colors, lang, createChart);
+	require('./graphs/graph3')(colors, lang, createChart);
+	require('./graphs/graph4')(colors, lang, createChart);
+	require('./graphs/graph5')(colors, lang, createChart);
+	require('./graphs/graph6')(colors, lang, createChart);
+	require('./graphs/graph7')(colors, lang, createChart);
+});

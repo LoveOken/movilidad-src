@@ -47,11 +47,11 @@ module.exports = (colors, lang, createChart) => {
 					}
 				};
 			},
-			getFilename: (code) => lang.title5.join(' ').replace('{c}', lang.country[code]),
+			getFilename: (code) => lang.title5.replace('{c}', lang['country' + code]),
 			onFetch: (rows, code, select, display) => {
 				display.title(
-					lang.title5.map((v) => v.replace('{c}', lang.country[code])),
-					lang.subtitle4n5,
+					lang.title5.replace('{c}', lang['country' + code]),
+					lang.subtitle5,
 					lang.source2
 				);
 				display.absolute('x');

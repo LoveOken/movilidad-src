@@ -41,7 +41,7 @@ module.exports = (colors, lang, createChart) => {
 				};
 			},
 			getFilename: (code, select) => {
-				const title = lang.title2.replace('{c}', lang.country[code]);
+				const title = lang.title2.replace('{c}', lang['country' + code]) + ' ';
 
 				if (select.value == 1) {
 					return title + lang.subtitle2a;
@@ -62,8 +62,8 @@ module.exports = (colors, lang, createChart) => {
 					}
 
 					display.title(
-						lang.title2.replace('{c}', lang.country[code]),
-						lang.subtitle2 + subtitle,
+						lang.title2.replace('{c}', lang['country' + code]),
+						subtitle,
 						lang.source1
 					);
 

@@ -39,7 +39,7 @@ module.exports = (colors, lang, createChart) => {
 					}
 				};
 			},
-			getFilename: (code) => lang.title1.replace('{c}', lang.country[code]),
+			getFilename: (code) => lang.title1.replace('{c}', lang['country' + code]),
 			setFills: (data) => {
 				for (const dataset of data.datasets) {
 					const hex = dataset.backgroundColor.slice(0, 7);
@@ -49,7 +49,7 @@ module.exports = (colors, lang, createChart) => {
 			},
 			onFetch: (rows, code, select, display) => {
 				display.title(
-					lang.title1.replace('{c}', lang.country[code]),
+					lang.title1.replace('{c}', lang['country' + code]),
 					lang.subtitle1,
 					lang.source1
 				);

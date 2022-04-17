@@ -9,7 +9,7 @@ const translateLabels = require('../common/translateLabels');
 class Spreadsheet {
 	constructor(arr) {
 		const workbook = XLSX.read(new Uint8Array(arr), { type: 'array' });
-		const worksheet = workbook.Sheets['Hoja 1'];
+		const worksheet = Object.values(workbook.Sheets)[0];
 
 		// El atributo data tiene acceso a los datos de Excel
 		this.data = XLSX.utils.sheet_to_json(worksheet);
