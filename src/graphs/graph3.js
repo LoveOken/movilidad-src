@@ -12,10 +12,12 @@ module.exports = (colors, lang, createChart) => {
 					}
 				}
 			},
-			ticks: 11
+			ticks: 11,
+			labels: false
 		},
 		{
 			getData: (file, country) => {
+				file.setLang(lang);
 				const etiquetas = [
 					'2010',
 					'2011',

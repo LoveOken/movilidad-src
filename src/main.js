@@ -3,7 +3,7 @@ const createChart = require('./factories/createChart');
 const Spreadsheet = require('./factories/readSheets');
 
 const url =
-	'https://cdn.statically.io/gh/LoveOken/movilidad-src/main/spreadsheets/EMAC_Traduccion.xlsx';
+	'https://cdn.statically.io/gh/LoveOken/movilidad-src/main/spreadsheets/EMAC_TraduccionBeta.xlsx';
 
 Spreadsheet.fetch(url, (file) => {
 	const code = document.documentElement.lang.startsWith('es') ? 'es' : 'en';

@@ -17,6 +17,7 @@ module.exports = (colors, lang, createChart) => {
 		},
 		{
 			getData: (file, country) => {
+				file.setLang(lang);
 				const etiquetas = ['1990', '1995', '2000', '2005', '2010', '2015', '2020'];
 
 				return {

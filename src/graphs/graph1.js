@@ -15,6 +15,7 @@ module.exports = (colors, lang, createChart) => {
 		},
 		{
 			getData: (file, country) => {
+				file.setLang(lang);
 				const etiquetas = [
 					'2010',
 					'2011',
@@ -44,7 +45,7 @@ module.exports = (colors, lang, createChart) => {
 				for (const dataset of data.datasets) {
 					const hex = dataset.backgroundColor.slice(0, 7);
 
-					dataset.backgroundColor = hex + '50';
+					dataset.backgroundColor = hex + '15';
 				}
 			},
 			onFetch: (rows, code, select, display) => {

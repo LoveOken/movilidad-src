@@ -1,7 +1,5 @@
 /* global XLSX */
 
-const translateLabels = require('../common/translateLabels');
-
 /**
  * Objeto que representa al archivo excel
  */
@@ -13,6 +11,7 @@ class Spreadsheet {
 
 		// El atributo data tiene acceso a los datos de Excel
 		this.data = XLSX.utils.sheet_to_json(worksheet);
+		this.lang = {};
 	}
 
 	/**
@@ -24,7 +23,7 @@ class Spreadsheet {
 
 	createValues(label, cells) {
 		return {
-			label: translateLabels(label),
+			label: this.lang[label],
 			cells,
 			shift: function () {
 				this.cells.shift();
@@ -66,6 +65,10 @@ class Spreadsheet {
 				'The country code/parameter is invalid - El código país/parametro es invalido.'
 			);
 		}
+	}
+
+	setLang(lang) {
+		this.lang = lang;
 	}
 
 	/**

@@ -16,6 +16,7 @@ module.exports = (colors, lang, createChart) => {
 		},
 		{
 			getData: (file, country) => {
+				file.setLang(lang);
 				const etiquetas = [
 					'0a4',
 					'5a9',
