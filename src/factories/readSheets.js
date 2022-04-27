@@ -22,6 +22,8 @@ class Spreadsheet {
 	 */
 
 	createValues(label, cells) {
+		console.log(this.lang);
+
 		return {
 			label: this.lang[label],
 			cells,

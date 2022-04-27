@@ -12,7 +12,8 @@ module.exports = (colors, lang, createChart) => {
 					}
 				}
 			},
-			ticks: 11
+			ticks: 11,
+			labels: false
 		},
 		{
 			getData: (file, country) => {

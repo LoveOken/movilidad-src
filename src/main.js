@@ -3,14 +3,15 @@ const createChart = require('./factories/createChart');
 const Spreadsheet = require('./factories/readSheets');
 
 const url =
-	'https://cdn.statically.io/gh/LoveOken/movilidad-src/main/spreadsheets/EMAC_TraduccionBeta.xlsx';
+	'https://cdn.statically.io/gh/LoveOken/movilidad-src/main/spreadsheets/EMAC_TraduccionGamma.xlsx';
 
 Spreadsheet.fetch(url, (file) => {
 	const code = document.documentElement.lang.startsWith('es') ? 'es' : 'en';
 	const lang = {};
 
 	Object.values(file.data).forEach((e) => {
-		lang[e.type + e.id] = e[code];
+		const id = e.id || '';
+		lang[e.type + id] = e[code];
 	});
 
 	require('./graphs/graph1')(colors, lang, createChart);
