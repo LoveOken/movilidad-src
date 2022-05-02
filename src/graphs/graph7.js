@@ -39,22 +39,8 @@ module.exports = (colors, lang, createChart) => {
 
 				return {
 					etiquetas,
-					hoja1: {
-						ecuador: file.readRow('ec', 'matricula_cantidad', etiquetas),
-						colombia: file.readRow('co', 'matricula_cantidad', etiquetas),
-						peru: file.readRow('pe', 'matricula_cantidad', etiquetas),
-						venezuela: file.readRow('ve', 'matricula_cantidad', etiquetas),
-						otrosPaises: file.readRow('am', 'matricula_cantidad', etiquetas),
-						otrosContinentes: file.readRow('un', 'matricula_cantidad', etiquetas)
-					},
-					hoja2: {
-						ecuador: file.readRow('ec', 'matricula_porcentaje', etiquetas),
-						colombia: file.readRow('co', 'matricula_porcentaje', etiquetas),
-						peru: file.readRow('pe', 'matricula_porcentaje', etiquetas),
-						venezuela: file.readRow('ve', 'matricula_porcentaje', etiquetas),
-						otrosPaises: file.readRow('am', 'matricula_porcentaje', etiquetas),
-						otrosContinentes: file.readRow('un', 'matricula_porcentaje', etiquetas)
-					}
+					hoja1: file.readMany('ec', 'matricula_cantidad', etiquetas),
+					hoja2: file.readMany('ec', 'matricula_porcentaje', etiquetas)
 				};
 			},
 			getFilename: (code, select) => {

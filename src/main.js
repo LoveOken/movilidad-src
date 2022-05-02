@@ -2,8 +2,7 @@ const colors = require('./common/colors');
 const createChart = require('./factories/createChart');
 const Spreadsheet = require('./factories/readSheets');
 
-const url =
-	'https://cdn.statically.io/gh/LoveOken/movilidad-src/main/spreadsheets/EMAC_TraduccionGamma.xlsx';
+const url = document.getElementsByName('data-traduccion')[0].getAttribute('content');
 
 Spreadsheet.fetch(url, (file) => {
 	const code = document.documentElement.lang.startsWith('es') ? 'es' : 'en';

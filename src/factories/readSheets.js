@@ -25,7 +25,7 @@ class Spreadsheet {
 		console.log(this.lang);
 
 		return {
-			label: this.lang[label],
+			label: this.lang[label] || label,
 			cells,
 			shift: function () {
 				this.cells.shift();
@@ -62,6 +62,28 @@ class Spreadsheet {
 			const values = labels.map((v) => row[v]);
 
 			return this.createValues(param, values);
+		} else {
+			throw new Error(
+				'The country code/parameter is invalid - El código país/parametro es invalido.'
+			);
+		}
+	}
+
+	readMany(code, param, labels) {
+		// Busca en el archivo filas con el parametro y codigo correspondiente
+		const rows = this.data.filter((r) => r.cod_pais === code && r.parametro === param);
+
+		if (rows.length > 0) {
+			const result = {};
+
+			rows.forEach((row) => {
+				// Mapea según etiquetas predeterminadas
+				const values = labels.map((v) => row[v]);
+
+				result[row.pais_origen] = this.createValues(row.pais_origen, values);
+			});
+
+			return result;
 		} else {
 			throw new Error(
 				'The country code/parameter is invalid - El código país/parametro es invalido.'
