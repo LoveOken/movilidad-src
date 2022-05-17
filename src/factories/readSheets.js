@@ -7,11 +7,13 @@
 class Spreadsheet {
 	constructor(arr) {
 		const workbook = XLSX.read(new Uint8Array(arr), { type: 'array' });
-		const worksheet = Object.values(workbook.Sheets)[0];
+		const worksheet = workbook.Sheets['Hoja 1'];
 
 		// El atributo data tiene acceso a los datos de Excel
 		this.data = XLSX.utils.sheet_to_json(worksheet);
 		this.lang = {};
+
+		console.log(this.data);
 	}
 
 	/**
@@ -22,8 +24,6 @@ class Spreadsheet {
 	 */
 
 	createValues(label, cells) {
-		console.log(this.lang);
-
 		return {
 			label: this.lang[label] || label,
 			cells,
