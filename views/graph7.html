@@ -42,6 +42,10 @@
         if (urlParams.has('lang')) {
             document.documentElement.setAttribute('lang', urlParams.get('lang'));
         }
+
+        if (urlParams.has('pais')) {
+            document.getElementsByTagName('canvas')[0].setAttribute('data-pais', urlParams.get('pais'));
+        }
     </script>
         <meta name="data-traduccion" content="https://cdn.statically.io/gh/LoveOken/movilidad-src/main/spreadsheets/EMAC_TraduccionDelta.xlsx" >
     <!-- XLSX -->
