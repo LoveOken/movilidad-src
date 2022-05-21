@@ -35,13 +35,15 @@ module.exports = (colors, lang, createChart) => {
 				return {
 					etiquetas,
 					hoja1: {
-						logroPrimaria: file.readRow(country, 'primaria', etiquetas).nullify()
+						logroPrimaria: file.readRow(country, ['primaria', 'primary'], etiquetas).nullify()
 					},
 					hoja2: {
-						logroSecundaria: file.readRow(country, 'sec_baja', etiquetas).nullify()
+						logroSecundaria: file.readRow(country, ['sec_baja', 'low_sec'], etiquetas).nullify()
 					},
 					hoja3: {
-						logroSecundariaAlta: file.readRow(country, 'sec_alta', etiquetas).nullify()
+						logroSecundariaAlta: file
+							.readRow(country, ['sec_alta', 'up_sec'], etiquetas)
+							.nullify()
 					}
 				};
 			},

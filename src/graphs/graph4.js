@@ -56,7 +56,11 @@ module.exports = (colors, lang, createChart) => {
 						'75+'
 					],
 					hoja1: {
-						poblacionTotalMigrante: file.readRow(country, 'pobl_migrante_cant', etiquetas)
+						poblacionTotalMigrante: file.readRow(
+							country,
+							['pobl_migrante_cant', 'migr_stock_quant'],
+							etiquetas
+						)
 					}
 				};
 			},

@@ -35,10 +35,14 @@ module.exports = (colors, lang, createChart) => {
 				return {
 					etiquetas,
 					hoja1: {
-						edades15oMas: file.readRow(country, '15_anos_o_mas', etiquetas).nullify()
+						edades15oMas: file
+							.readRow(country, ['15_anos_o_mas', '15_plus_years'], etiquetas)
+							.nullify()
 					},
 					hoja2: {
-						edades15a24: file.readRow(country, '15_a_24_anos', etiquetas).nullify()
+						edades15a24: file
+							.readRow(country, ['15_a_24_anos', '15_to_24_years'], etiquetas)
+							.nullify()
 					}
 				};
 			},

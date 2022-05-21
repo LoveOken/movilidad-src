@@ -33,10 +33,10 @@ module.exports = (colors, lang, createChart) => {
 				return {
 					etiquetas,
 					hoja1: {
-						preescolar: file.readRow(country, 'ed_preescolar', etiquetas),
-						primaria: file.readRow(country, 'ed_primaria', etiquetas),
-						secundaria: file.readRow(country, 'ed_secundaria', etiquetas),
-						terciaria: file.readRow(country, 'ed_terciaria', etiquetas)
+						preescolar: file.readRow(country, ['ed_preescolar', 'ed_preprimary'], etiquetas),
+						primaria: file.readRow(country, ['ed_primaria', 'ed_primary'], etiquetas),
+						secundaria: file.readRow(country, ['ed_secundaria', 'ed_secondary'], etiquetas),
+						terciaria: file.readRow(country, ['ed_terciaria', 'ed_terciary'], etiquetas)
 					}
 				};
 			},

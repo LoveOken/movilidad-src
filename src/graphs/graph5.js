@@ -60,8 +60,10 @@ module.exports = (colors, lang, createChart) => {
 						'75+'
 					],
 					hoja1: {
-						mujeres: file.readRow(country, 'pobl_migrante_muj', etiquetas).invert(),
-						hombres: file.readRow(country, 'pobl_migrante_hom', etiquetas)
+						mujeres: file
+							.readRow(country, ['pobl_migrante_muj', 'migr_stock_women'], etiquetas)
+							.invert(),
+						hombres: file.readRow(country, ['pobl_migrante_hom', 'migr_stock_men'], etiquetas)
 					}
 				};
 			},

@@ -23,7 +23,11 @@ module.exports = (colors, lang, createChart) => {
 				return {
 					etiquetas,
 					hoja1: {
-						porcentaje: file.readRow(country, 'pobl_migrante_porcentaje', etiquetas)
+						porcentaje: file.readRow(
+							country,
+							['pobl_migrante_porcentaje', 'migr_stock_percentage'],
+							etiquetas
+						)
 					}
 				};
 			},

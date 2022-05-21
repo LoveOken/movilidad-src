@@ -12,8 +12,6 @@ class Spreadsheet {
 		// El atributo data tiene acceso a los datos de Excel
 		this.data = XLSX.utils.sheet_to_json(worksheet);
 		this.lang = {};
-
-		console.log(this.data);
 	}
 
 	/**
@@ -48,20 +46,20 @@ class Spreadsheet {
 	/**
 	 * Busca una fila del archivo y genera valores usables en el gráfico
 	 * @param {String} code Codigo del país
-	 * @param {String} param Nombre de la variable a buscar
+	 * @param {Array<String>} param Parametros a buscar, valor 0 siempre es el valor español
 	 * @param {Array<String>} labels
 	 * @returns
 	 */
 
 	readRow(code, param, labels) {
 		// Busca en el archivo una fila con el parametro y codigo correspondiente
-		const row = this.data.find((r) => r.cod_pais === code && r.parametro === param);
+		const row = this.data.find((r) => r.cod_pais === code && param.includes(r.parametro));
 
 		if (row) {
 			// Mapea según etiquetas predeterminadas
 			const values = labels.map((v) => row[v]);
 
-			return this.createValues(param, values);
+			return this.createValues(param[0], values);
 		} else {
 			throw new Error(
 				'The country code/parameter is invalid - El código país/parametro es invalido.'
